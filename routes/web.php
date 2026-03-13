@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Moderator\DashboardController as ModeratorDashboardController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\Moderator\DashboardController as ModeratorDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,18 +43,6 @@ Route::middleware(['auth', 'moderator'])
 */
 
 
-/*
-    ADMINISTRATOR ROUTES | START
-*/
-
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/', AdminDashboardController::class)->name('admin.dashboard');
-    });
-
-/*
-    ADMINISTRATOR ROUTES | END
-*/
-
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/moderator.php';
