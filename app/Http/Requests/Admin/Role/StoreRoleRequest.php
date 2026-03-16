@@ -27,4 +27,14 @@ class StoreRoleRequest extends FormRequest
             'name' => 'required|string|max:50|unique:roles,name',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'You must enter a role name!',
+            'name.string' => 'Your role must be text!',
+            'name.max' => 'The role name connot be longer than 50 characters!',
+            'name.unique' => 'This role already exists!'
+        ];
+    }
 }

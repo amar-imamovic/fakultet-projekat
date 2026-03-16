@@ -13,10 +13,8 @@ class DestroyRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $role = $this->route('role');
-
         // Only allow 'admin' users to delete, but never delete the 'admin' role itself
-        return Str::lower($this->user()?->role?->name) === 'admin' && $role->name !== 'admin';
+        return Str::lower($this->user()?->role?->name) === 'admin' && $this->role->name !== 'Admin';
     }
 
     /**

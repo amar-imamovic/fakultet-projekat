@@ -1,3 +1,12 @@
-<div>
-    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
-</div>
+@extends('admin.dashboard')
+
+@section('content')
+    <h1>Role Details</h1>
+
+    @include('components.messages')
+
+    <p>ID: {{ $role->id }}</p>
+    <p>Name: {{ $role->name }}</p>
+
+    <a href="{{ route('admin.roles.index') }}">Back</a>
+@endsection

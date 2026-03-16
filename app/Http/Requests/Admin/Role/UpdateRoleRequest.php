@@ -14,7 +14,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Str::lower($this->user()->role?->name) === 'admin';
+        return Str::lower($this->user()->role?->name) === 'admin' && Str::lower($this->role->name) !== 'admin';
     }
 
     /**
@@ -24,14 +24,12 @@ class UpdateRoleRequest extends FormRequest
      */
     public function rules(): array
     {
-        $roleId = $this->route('role')->id;
-
         return [
             'name' => [
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('roles', 'name')->ignore($roleId),
+                Rule::unique('roles', 'name')->ignore($this->role->id),
             ],
         ];
     }

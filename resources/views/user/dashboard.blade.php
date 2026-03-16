@@ -1,5 +1,12 @@
-@extends('dashboard')
+@extends('layouts.app')
+
+@section('nav-links')
+    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('user.dashboard')">
+        Dashboard
+    </x-nav-link>
+@endsection
+
 
 @section('content')
-    <p>I AM AN USER, MY NAME IS</p>
+    <h2 class="text-2xl font-bold">User Dashboard</h2>
 @endsection

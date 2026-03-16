@@ -1,17 +1,26 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <div class="">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    @yield('content')
-                </div>
+        <nav class="border-b-2 border-b-slate-800 grid grid-flow-col justify-between pt-6 pb-6 pl-6 pr-6">
+            <a href="{{ route('dashboard') }}">
+                <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+            </a>
+            <div class="grid grid-flow-col content-center gap-8">
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
             </div>
-        </div>
+            <div class="grid items-center">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="cursor-pointer">Logout</a>
+                </form>
+            </div>
+        </nav>
+
+        @yield('content')
     </div>
 </x-app-layout>

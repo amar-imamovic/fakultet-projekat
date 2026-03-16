@@ -36,7 +36,11 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        // Store Role Request
+        Role::create($request->validated());
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('success', 'Role created successfully!');
     }
 
     /**
@@ -44,7 +48,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('admin.roles.show', compact('role'));
     }
 
     /**
@@ -52,7 +56,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
@@ -60,14 +64,22 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        $role->update($request->validated());
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('success', 'Role updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DestroyRoleRequest $role)
+    public function destroy(DestroyRoleRequest $request, Role $role)
     {
-        //
+        $role->delete();
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('success', 'Role deleted successfully!');
     }
 }
