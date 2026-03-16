@@ -1,23 +1,37 @@
 @extends('admin.dashboard')
 
 @section('content')
-    <h1>Create Role</h1>
+    <h1 class="text-2xl font-bold mb-6">Create Role</h1>
 
-    @include('components.messages')
+    <div class="bg-white shadow rounded p-6">
 
-    <form action="{{ route('admin.roles.store') }}" method="POST">
+        <form method="POST" action="{{ route('admin.roles.store') }}">
 
-        @csrf
+            @csrf
 
-        <div>
-            <label>Role Name</label>
+            <div class="mb-4">
+                <label>Name</label>
+                <input type="text" name="name" value="{{ old('name') }}" class="border w-full p-2 rounded">
 
-            <input type="text" name="name" value="{{ old('name') }}">
-        </div>
+                @error('name')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <br>
 
-        <button type="submit">Create Role</button>
+            <div class="flex gap-4 mt-4">
 
-    </form>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded">
+                    Create
+                </button>
+
+                <a href="{{ route('admin.roles.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded">
+                    Back
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
 @endsection

@@ -8,8 +8,12 @@
         Dashboard
     </x-nav-link>
 
-    <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('roles.*')">
+    <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.*')">
         Roles
+    </x-nav-link>
+
+    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+        Users
     </x-nav-link>
 
 @endsection
