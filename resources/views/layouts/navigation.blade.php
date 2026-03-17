@@ -19,9 +19,45 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        @yield('nav-links')
-                    </div>
+                    @auth
+                        @if (auth()->user()->role_id === 1)
+                            {{-- Admin Navigation --}}
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.*')">
+                                Roles
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                                Users
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+                                Posts
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.comments.index')" :active="request()->routeIs('admin.comments.*')">
+                                Comments
+                            </x-nav-link>
+                        @elseif(auth()->user()->role_id === 2)
+                            {{-- Moderator Navigation --}}
+                            <x-nav-link :href="route('moderator.dashboard')" :active="request()->routeIs('moderator.dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                            <x-nav-link :href="route('moderator.posts.index')" :active="request()->routeIs('moderator.posts.*')">
+                                Posts
+                            </x-nav-link>
+                            <x-nav-link :href="route('moderator.comments.index')" :active="request()->routeIs('moderator.comments.*')">
+                                Comments
+                            </x-nav-link>
+                        @else
+                            {{-- Regular User Navigation --}}
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                Dashboard
+                            </x-nav-link>
+                            <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')">
+                                Posts
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -82,9 +118,45 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @auth
+                @if (auth()->user()->role_id === 1)
+                    {{-- Admin Navigation --}}
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.*')">
+                        {{ __('Roles') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                        {{ __('Users') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+                        {{ __('Posts') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.comments.index')" :active="request()->routeIs('admin.comments.*')">
+                        {{ __('Comments') }}
+                    </x-responsive-nav-link>
+                @elseif(auth()->user()->role_id === 2)
+                    {{-- Moderator Navigation --}}
+                    <x-responsive-nav-link :href="route('moderator.dashboard')" :active="request()->routeIs('moderator.dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('moderator.posts.index')" :active="request()->routeIs('moderator.posts.*')">
+                        {{ __('Posts') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('moderator.comments.index')" :active="request()->routeIs('moderator.comments.*')">
+                        {{ __('Comments') }}
+                    </x-responsive-nav-link>
+                @else
+                    {{-- Regular User Navigation --}}
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')">
+                        {{ __('Posts') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

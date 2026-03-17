@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 
 /*
     ADMINISTRATOR ROUTES | START
@@ -68,6 +70,47 @@ Route::middleware(['auth', 'admin'])
 
         /*
             USER ROUTES | END
+        */
+
+
+
+        /*
+            POSTS ROUTES | START
+        */
+
+        Route::controller(AdminPostController::class)
+            ->name('posts.')
+            ->prefix('posts')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{post}', 'show')->name('show');
+                Route::get('/{post}/edit', 'edit')->name('edit');
+                Route::put('/{post}', 'update')->name('update');
+                Route::delete('/{post}', 'destroy')->name('destroy');
+                Route::post('/{post}/pin', 'togglePin')->name('pin');
+                Route::post('/{post}/lock', 'toggleLock')->name('lock');
+            });
+
+        /*
+            POSTS ROUTES | END
+        */
+
+
+
+        /*
+            COMMENTS ROUTES | START
+        */
+
+        Route::controller(AdminCommentController::class)
+            ->name('comments.')
+            ->prefix('comments')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::delete('/{comment}', 'destroy')->name('destroy');
+            });
+
+        /*
+            COMMENTS ROUTES | END
         */
     });
 
