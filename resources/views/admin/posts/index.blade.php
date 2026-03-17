@@ -3,18 +3,20 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-6">Manage Posts</h1>
 
-    <div class="bg-white shadow rounded p-6">
-        <div class="flex justify-between items-center mb-4">
-            <a href="{{ route('posts.index') }}" class="text-blue-600 hover:text-blue-800">
-                View Public Posts →
-            </a>
-        </div>
+    <div class="flex justify-end items-center mb-4">
+        <a href="{{ route('posts.index') }}" class="text-blue-600 hover:text-blue-800">
+            View Public Posts →
+        </a>
+    </div>
+
+    <div class="bg-white shadow rounded p-6 flex flex-col items-center">
 
         {{-- Filter Form --}}
         <form method="GET" action="{{ route('admin.posts.index') }}" class="mb-6 flex flex-wrap gap-4 items-end">
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <select name="status" id="status"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     <option value="all" {{ request('status') === 'all' ? 'selected' : '' }}>All Posts</option>
                     <option value="pinned" {{ request('status') === 'pinned' ? 'selected' : '' }}>Pinned Only</option>
                     <option value="locked" {{ request('status') === 'locked' ? 'selected' : '' }}>Locked Only</option>
@@ -23,11 +25,13 @@
 
             <div>
                 <label for="sort" class="block text-sm font-medium text-gray-700">Sort By</label>
-                <select name="sort" id="sort" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <select name="sort" id="sort"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Latest First</option>
                     <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Oldest First</option>
                     <option value="most_liked" {{ request('sort') === 'most_liked' ? 'selected' : '' }}>Most Liked</option>
-                    <option value="most_commented" {{ request('sort') === 'most_commented' ? 'selected' : '' }}>Most Commented</option>
+                    <option value="most_commented" {{ request('sort') === 'most_commented' ? 'selected' : '' }}>Most
+                        Commented</option>
                 </select>
             </div>
 
@@ -121,7 +125,7 @@
                         </tbody>
                     </table>
 
-                    <div class="mt-4">
+                    <div class="mt-4 bg-white">
                         {{ $posts->links() }}
                     </div>
                 </div>

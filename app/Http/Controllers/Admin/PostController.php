@@ -17,7 +17,7 @@ class PostController extends Controller
             ->withCount('comments', 'likes')
             ->filterByStatus($validated->status)
             ->sortBy($validated->sort)
-            ->paginate(20)
+            ->paginate(10)
             ->withQueryString();
 
         return view('admin.posts.index', compact('posts'));

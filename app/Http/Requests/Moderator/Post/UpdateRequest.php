@@ -3,12 +3,14 @@
 namespace App\Http\Requests\Moderator\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class UpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Str::lower($this->user()->role?->name) === 'admin'
+            || Str::lower($this->user()->role?->name) === 'moderator';
     }
 
     public function rules(): array

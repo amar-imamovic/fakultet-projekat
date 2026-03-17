@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Admin\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class IndexRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Str::lower($this->user()->role?->name) === 'admin';
     }
 
     public function rules(): array
